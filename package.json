@@ -1,5 +1,5 @@
 {
-  "author": "YOU <YOU@example.com>",
+  "author": "Ranjan Paudel <paudeljimrranjan@gmail.com>",
   "name": "my_actionhero_project",
   "description": "my actionhero project",
   "version": "0.1.0",
@@ -8,9 +8,11 @@
   },
   "dependencies": {
     "actionhero": "24.0.0",
-    "ws": "latest",
+    "dotenv": "^8.2.0",
     "ioredis": "latest",
-    "winston": "latest"
+    "mongoose": "^5.10.9",
+    "winston": "latest",
+    "ws": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",

@@ -42,8 +42,8 @@ export const DEFAULT = {
         // automaticRoutes should an array of strings - HTTP verbs, ie: [] (default), ['get'], ['post'], ['get','put'], ['get','post','put'], etc.
         automaticRoutes: process.env.AUTOMATIC_ROUTES
           ? process.env.AUTOMATIC_ROUTES.split(",")
-              .map((v) => v.trim())
-              .map((v) => v.toLowerCase())
+            .map((v) => v.trim())
+            .map((v) => v.toLowerCase())
           : [],
         // The cache or (if etags are enabled) next-revalidation time to be returned for all flat files served from /public; defined in seconds
         flatFileCacheDuration: 60,
@@ -94,6 +94,23 @@ export const DEFAULT = {
       };
     },
   },
+  routes: config => {
+    return {
+      get: [
+        { path: '/products', action: 'readAllProductsAction' },
+        { path: '/product', action: 'readProductAction' }
+      ],
+      post: [
+        { path: '/product', action: 'createProductAction' }
+      ],
+      put: [
+        { path: '/product', action: 'updateProductAction' }
+      ],
+      delete: [
+        { path: '/product', action: 'deleteProductAction' }
+      ]
+    }
+  }
 };
 
 export const production = {

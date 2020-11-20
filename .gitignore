@@ -10,6 +10,7 @@ locales/test-env-*
 public/javascript/ActionheroWebsocketClient.js
 public/javascript/ActionheroWebsocketClient.min.js
 dist
+.env
 
 # Node / NPM
 npm-debug.log
