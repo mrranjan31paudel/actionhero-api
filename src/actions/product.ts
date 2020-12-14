@@ -10,10 +10,10 @@ export class ReadAllProductsAction extends Action {
     this.description = 'Read all products';
   }
 
-  async run(request) {
+  async run() {
     const products = await productServices.readAllProducts();
 
-    return { products };
+    return { data: products };
   }
 }
 
@@ -40,7 +40,7 @@ export class ReadProductAction extends Action {
   async run(request) {
     const product = await productServices.readProduct(Number(request.params.code));
 
-    return { product };
+    return { data: product };
   }
 }
 
@@ -107,7 +107,7 @@ export class CreateProductAction extends Action {
   async run(request) {
     const result = await productServices.createProduct(request.params);
 
-    return { result };
+    return { data: result };
   }
 }
 
@@ -167,7 +167,7 @@ export class UpdateProductAction extends Action {
   async run(request) {
     const result = await productServices.updateProduct(request.params);
 
-    return { result };
+    return { data: result };
   }
 }
 
@@ -194,6 +194,6 @@ export class DeleteProductAction extends Action {
   async run(request) {
     const result = await productServices.deleteProduct(request.params.code);
 
-    return { result };
+    return { data: result };
   }
 }
