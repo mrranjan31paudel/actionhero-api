@@ -1,8 +1,10 @@
-import { Action } from "actionhero"
-const moment = require('moment');
+import { Action } from 'actionhero';
 
-import * as userService from "../services/user"
-import { stringHasValidLength } from "../utils/string"
+import isValidDate from '../validators/date';
+import isvalidEmail from '../validators/email';
+
+import * as userService from '../services/user';
+import { isValidLengthString } from '../validators/string';
 
 export class ReadAllUsersAction extends Action {
   constructor() {
@@ -48,52 +50,20 @@ export class CreateUserAction extends Action {
     this.inputs = {
       email: {
         required: true,
-        validator: this.emailValidator
+        validator: isvalidEmail
       },
       name: {
         required: true,
-        validator: this.nameValidator
+        validator: val => isValidLengthString(val, 3, 'name')
       },
       dob: {
         required: true,
-        validator: this.dateValidator
+        validator: isValidDate
       },
       address: {
         required: true,
-        validator: this.addressValidator
+        validator: val => isValidLengthString(val, 3, 'address')
       }
-    }
-  }
-
-  emailValidator(email) {
-    const emailRegex = /^[a-z]([a-z]|[0-9]){2,100}@[a-z]{2,100}\.com$/;
-
-    if (!emailRegex.test(email)) {
-      throw new Error(`Invalid 'email' format.`);
-    }
-  }
-
-  dateValidator(date) {
-    const dateRegex = /^\d\d\d\d-\d\d-\d\d$/;
-
-    if (!dateRegex.test(date)) {
-      throw new Error(`'dob' should be in 'YYYY-MM-DD' format.`);
-    }
-
-    if (!moment(date).isValid()) {
-      throw new Error(`Invalid date value for 'dob' param.`);
-    }
-  }
-
-  nameValidator(name) {
-    if (!stringHasValidLength(name)) {
-      throw new Error(`'name' should be minimum 3 characters.`);
-    }
-  }
-
-  addressValidator(address) {
-    if (!stringHasValidLength(address)) {
-      throw new Error(`'address' should be minimum 3 characters.`);
     }
   }
 

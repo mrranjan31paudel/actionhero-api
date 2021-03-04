@@ -1,5 +1,8 @@
 import { Action } from "actionhero"
 
+import isNumber from '../validators/number';
+import isValidUnit from '../validators/unit';
+
 import * as productServices from "../services/product"
 
 export class ReadAllProductsAction extends Action {
@@ -26,15 +29,9 @@ export class ReadProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: this.productIdValidator
+        validator: val => isNumber(val, 'code')
       }
     };
-  }
-
-  productIdValidator(code) {
-    if (isNaN(code)) {
-      throw new Error(`'code' of the product in question should be a numerical value!`);
-    }
   }
 
   async run(request) {
@@ -53,7 +50,7 @@ export class CreateProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: this.codeValidator
+        validator: val => isNumber(val, 'code')
       },
       name: {
         required: true
@@ -63,44 +60,16 @@ export class CreateProductAction extends Action {
       },
       qty_in_store: {
         required: true,
-        validator: this.quantityValidator
+        validator: val => isNumber(val, 'qty_in_store')
       },
       rate: {
         required: true,
-        validator: this.rateValidator
+        validator: val => isNumber(val, 'rate')
       },
       unit: {
         required: true,
-        validator: this.unitValidator
+        validator: isValidUnit
       }
-    }
-  }
-
-  codeValidator(qty) {
-    if (isNaN(qty)) {
-      throw new Error(`'code' of the product should be a numerical value!`);
-    }
-  }
-
-  quantityValidator(qty) {
-    if (isNaN(qty)) {
-      throw new Error(`'quantity' of the product should be a numerical value!`);
-    }
-  }
-
-  rateValidator(rate) {
-    if (isNaN(rate)) {
-      throw new Error(`'rate' of the product should be a numerical value!`);
-    }
-  }
-
-  unitValidator(unit) {
-    if (typeof unit !== 'string') {
-      throw new Error(`'unit' should be of 'string' type!`);
-    }
-
-    if (!['KG', 'LTR', 'PACK'].includes(unit)) {
-      throw new Error(`'unit' should be one of: ${['KG', 'LTR'].join(', ')}!`);
     }
   }
 
@@ -120,47 +89,22 @@ export class UpdateProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: this.codeValidator
+        validator: val => isNumber(val, 'code')
       },
-      name: {},
-      vendor: {},
+      name: { required: false },
+      vendor: { required: false },
       qty_in_store: {
-        validator: this.quantityValidator
+        required: false,
+        validator: val => isNumber(val, 'qty_in_store')
       },
       rate: {
-        validator: this.rateValidator
+        required: false,
+        validator: val => isNumber(val, 'rate')
       },
       unit: {
-        validator: this.unitValidator
+        required: false,
+        validator: isValidUnit
       }
-    }
-  }
-
-  codeValidator(code) {
-    if (isNaN(code)) {
-      throw new Error(`'code' of the product should be a numerical value!`);
-    }
-  }
-
-  quantityValidator(qty) {
-    if (isNaN(qty)) {
-      throw new Error(`'quantity' of the product should be a numerical value!`);
-    }
-  }
-
-  rateValidator(rate) {
-    if (isNaN(rate)) {
-      throw new Error(`'rate' of the product should be a numerical value!`);
-    }
-  }
-
-  unitValidator(unit) {
-    if (typeof unit !== 'string') {
-      throw new Error(`'unit' should be of 'string' type!`);
-    }
-
-    if (!['KG', 'LTR', 'PACK'].includes(unit)) {
-      throw new Error(`'unit' should be one of: ${['KG', 'LTR'].join(', ')}!`);
     }
   }
 
@@ -180,14 +124,8 @@ export class DeleteProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: this.codeValidator
+        validator: val => isNumber(val, 'code')
       }
-    }
-  }
-
-  codeValidator(code) {
-    if (isNaN(code)) {
-      throw new Error(`'code' of the product should be a numerical value!`);
     }
   }
 
