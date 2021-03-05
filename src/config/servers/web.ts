@@ -97,10 +97,10 @@ export const DEFAULT = {
   routes: config => {
     return {
       get: [
-        { path: '/users', action: 'readAllUsersAction' },
-        { path: '/user', action: 'readUserAction' },
-        { path: '/products', action: 'readAllProductsAction' },
-        { path: '/product', action: 'readProductAction' }
+        { path: '/users', action: 'getAllUsersAction' },
+        { path: '/user', action: 'getUserAction' },
+        { path: '/products', action: 'getAllProductsAction' },
+        { path: '/product', action: 'getProductAction' }
       ],
       post: [
         { path: '/user', action: 'createUserAction' },

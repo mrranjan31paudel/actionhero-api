@@ -9,12 +9,12 @@ import {
 
 import * as userService from '../services/user';
 
-export class ReadAllUsersAction extends Action {
+export class ReadAllUsers extends Action {
   constructor() {
     super();
 
-    this.name = 'readAllUsersAction';
-    this.description = 'Read all users. Only available for ADMIN.'
+    this.name = 'getAllUsersAction';
+    this.description = 'Get all users. Only available for ADMIN.'
   }
 
   async run() {
@@ -24,12 +24,12 @@ export class ReadAllUsersAction extends Action {
   }
 }
 
-export class ReadUserAction extends Action {
+export class ReadUser extends Action {
   constructor() {
     super();
 
-    this.name = 'readUserAction';
-    this.description = 'Read single user. Only available for ADMIN and owner.';
+    this.name = 'getUserAction';
+    this.description = 'Get single user. Only available for ADMIN and owner.';
     this.inputs = {
       code: {
         required: true,
@@ -45,7 +45,7 @@ export class ReadUserAction extends Action {
   }
 }
 
-export class CreateUserAction extends Action {
+export class CreateUser extends Action {
   constructor() {
     super();
 

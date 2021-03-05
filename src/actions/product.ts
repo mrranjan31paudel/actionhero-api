@@ -5,12 +5,12 @@ import validateUnit from '../validators/unit';
 
 import * as productServices from "../services/product"
 
-export class ReadAllProductsAction extends Action {
+export class GetAllProducts extends Action {
   constructor() {
     super();
 
-    this.name = 'readAllProductsAction';
-    this.description = 'Read all products';
+    this.name = 'getAllProductsAction';
+    this.description = 'Get all products';
   }
 
   async run() {
@@ -20,12 +20,12 @@ export class ReadAllProductsAction extends Action {
   }
 }
 
-export class ReadProductAction extends Action {
+export class ReadProduct extends Action {
   constructor() {
     super();
 
-    this.name = 'readProductAction';
-    this.description = 'To read a product details';
+    this.name = 'getProductAction';
+    this.description = 'Get a product details';
     this.inputs = {
       code: {
         required: true,
@@ -41,7 +41,7 @@ export class ReadProductAction extends Action {
   }
 }
 
-export class CreateProductAction extends Action {
+export class CreateProduct extends Action {
   constructor() {
     super();
 
@@ -80,7 +80,7 @@ export class CreateProductAction extends Action {
   }
 }
 
-export class UpdateProductAction extends Action {
+export class UpdateProduct extends Action {
   constructor() {
     super();
 
@@ -115,7 +115,7 @@ export class UpdateProductAction extends Action {
   }
 }
 
-export class DeleteProductAction extends Action {
+export class DeleteProduct extends Action {
   constructor() {
     super();
 
