@@ -1,7 +1,17 @@
 import UserModel from "../models/User";
 
-export function readAllUsers() {
+export async function readAllUsers() {
   //check if user is admin or not *It seems verfication with a middleware will be better*
+  const data = await UserModel.findAllUsers({});
+
+  const formattedData = data.map(doc => {
+    const newDoc = { ...doc._doc };
+    delete newDoc.__v;
+
+    return newDoc;
+  });
+
+  return formattedData;
 }
 
 export function readUserByCode(code: string) {
@@ -23,7 +33,7 @@ export async function createUser(params: any) {
   const code = name.toLowerCase().replace(/ /g, '_') + '_' + String(noOfUsers + 1);
 
   const newUser = await UserModel.createUser({
-    email, code, name, dob, address, type: 'SALES_PERSON'
+    email, code, name, dob, address, role: 'SALES_PERSON'
   });
 
   return `New user created= ${newUser._id}`;
