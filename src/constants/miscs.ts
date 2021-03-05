@@ -1,3 +1,5 @@
+export const STANDARD_DATE_FORMAT = 'YYYY-MM-DD';
+
 export const ALLOWED_UNITS = ['KG', 'LTR', 'PACK'];
 export const USER_ROLES = ['ADMIN', 'SALES_PERSON'];
 
