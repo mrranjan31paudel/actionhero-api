@@ -1,21 +1,19 @@
-import * as moment from 'moment';
+import { validateStringType } from './string';
 
-import { DATE_REGEXP } from '../constants/miscs';
+import { isStandardDateFormat, isValidDate } from '../utils/date';
 
 /**
  * Validate date
  * @param value Date value to validate
  */
-export default function isValidDate(value: string) {
-  if (typeof value !== 'string') {
-    throw new Error(`'date' should be of 'string' type!`);
-  }
+export default function validateDate(value: string) {
+  validateStringType(value, 'date');
 
-  if (!DATE_REGEXP.test(value)) {
+  if (!isStandardDateFormat(value)) {
     throw new Error("date should be in 'YYYY-MM-DD' format");
   }
 
-  if (!moment(value).isValid()) {
+  if (!isValidDate(value)) {
     throw new Error('Invalid date');
   }
 }
