@@ -1,10 +1,13 @@
 import { Action } from 'actionhero';
 
-import isValidDate from '../validators/date';
-import isvalidEmail from '../validators/email';
+import validateDate from '../validators/date';
+import validateEmail from '../validators/email';
+import {
+  validateStringType,
+  validateStringLength
+} from '../validators/string';
 
 import * as userService from '../services/user';
-import { isValidLengthString } from '../validators/string';
 
 export class ReadAllUsersAction extends Action {
   constructor() {
@@ -29,7 +32,8 @@ export class ReadUserAction extends Action {
     this.description = 'Read single user. Only available for ADMIN and owner.';
     this.inputs = {
       code: {
-        required: true
+        required: true,
+        validator: val => validateStringType(val, 'code')
       }
     }
   }
@@ -50,19 +54,19 @@ export class CreateUserAction extends Action {
     this.inputs = {
       email: {
         required: true,
-        validator: isvalidEmail
+        validator: validateEmail
       },
       name: {
         required: true,
-        validator: val => isValidLengthString(val, 3, 'name')
+        validator: val => validateStringLength(val, 3, 'name')
       },
       dob: {
         required: true,
-        validator: isValidDate
+        validator: validateDate
       },
       address: {
         required: true,
-        validator: val => isValidLengthString(val, 3, 'address')
+        validator: val => validateStringLength(val, 3, 'address')
       }
     }
   }

@@ -1,7 +1,7 @@
 import { Action } from "actionhero"
 
-import isNumber from '../validators/number';
-import isValidUnit from '../validators/unit';
+import validateNumberType from '../validators/number';
+import validateUnit from '../validators/unit';
 
 import * as productServices from "../services/product"
 
@@ -29,7 +29,7 @@ export class ReadProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: val => isNumber(val, 'code')
+        validator: val => validateNumberType(val, 'code')
       }
     };
   }
@@ -50,7 +50,7 @@ export class CreateProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: val => isNumber(val, 'code')
+        validator: val => validateNumberType(val, 'code')
       },
       name: {
         required: true
@@ -60,15 +60,15 @@ export class CreateProductAction extends Action {
       },
       qty_in_store: {
         required: true,
-        validator: val => isNumber(val, 'qty_in_store')
+        validator: val => validateNumberType(val, 'qty_in_store')
       },
       rate: {
         required: true,
-        validator: val => isNumber(val, 'rate')
+        validator: val => validateNumberType(val, 'rate')
       },
       unit: {
         required: true,
-        validator: isValidUnit
+        validator: validateUnit
       }
     }
   }
@@ -89,21 +89,21 @@ export class UpdateProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: val => isNumber(val, 'code')
+        validator: val => validateNumberType(val, 'code')
       },
       name: { required: false },
       vendor: { required: false },
       qty_in_store: {
         required: false,
-        validator: val => isNumber(val, 'qty_in_store')
+        validator: val => validateNumberType(val, 'qty_in_store')
       },
       rate: {
         required: false,
-        validator: val => isNumber(val, 'rate')
+        validator: val => validateNumberType(val, 'rate')
       },
       unit: {
         required: false,
-        validator: isValidUnit
+        validator: validateUnit
       }
     }
   }
@@ -124,7 +124,7 @@ export class DeleteProductAction extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: val => isNumber(val, 'code')
+        validator: val => validateNumberType(val, 'code')
       }
     }
   }
