@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const db = require('../config/mongoDB');
 
+import { USER_ROLES, ROLE_TYPE } from '../constants/miscs';
+
 export interface UserType {
-  code: string,
-  email: string,
-  name: string,
-  address: string,
-  dob: Date,
-  type: 'ADMIN' | 'SALES_PERSON'
+  code?: string,
+  email?: string,
+  name?: string,
+  address?: string,
+  dob?: Date,
+  role?: ROLE_TYPE
 };
 
 interface FiltersType {
@@ -26,13 +28,13 @@ const UserSchema = mongoose.Schema({
   name: String,
   address: String,
   dob: Date,
-  type: {
+  role: {
     type: String,
-    enum: ['ADMIN', 'SALES_PERSON']
+    enum: USER_ROLES
   }
 }, {
   timestamps: {
-    createdAt: 'added_at',
+    createdAt: 'created_at',
     updatedAt: 'updated_at'
   }
 });
