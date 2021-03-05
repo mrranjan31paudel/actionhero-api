@@ -14,8 +14,18 @@ export async function readAllUsers() {
   return formattedData;
 }
 
-export function readUserByCode(code: string) {
+export async function readUserByCode(code: string) {
   //check if user is admin or not
+  const product = await UserModel.findUserByCode(code);
+
+  if (!product) {
+    throw new Error('User not found!');
+  }
+
+  const formattedUserData = { ...product._doc };
+  delete formattedUserData.__v;
+
+  return formattedUserData;
 }
 
 export async function createUser(params: any) {

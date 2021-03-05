@@ -46,7 +46,7 @@ function findAllUsers(filters: FiltersType) {
 }
 
 function findUserByCode(code: string) {
-
+  return User.findOne({ code: code });
 }
 
 function findUserByEmail(email: string) {
