@@ -88,9 +88,7 @@ export async function deleteProduct(code: number) {
     throw new Error(`Product ${code} does not exist!`);
   }
 
-  const data = await ProductModel.deleteProductByCode(code);
-
-  console.log(data);
+  await ProductModel.deleteProductByCode(code);
 
   return `Product ${code} deleted.`;
 }

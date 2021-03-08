@@ -77,6 +77,14 @@ export async function updateUser(params: any) {
   return `User ${code} updated!`;
 }
 
-export function deleteUser() {
-  //check if user is admin or not
+export async function deleteUser(code: string) {
+  const user = await UserModel.findUserByCode(code);
+
+  if (!user) {
+    throw new Error(`User does not exist!`);
+  }
+
+  await UserModel.deleteUser(code);
+
+  return 'User deleted!';
 }

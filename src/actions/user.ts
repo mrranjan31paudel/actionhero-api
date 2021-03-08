@@ -110,3 +110,24 @@ export class UpdateUser extends Action {
     return { data: result };
   }
 }
+
+export class DeleteUser extends Action {
+  constructor() {
+    super();
+
+    this.name = "deleteUserAction";
+    this.inputs = {
+      code: {
+        required: true,
+        validator: val => validateStringType(val, 'code')
+      }
+    }
+    this.description = "Deletes specified user, only for ADMIN!";
+  }
+
+  async run(request) {
+    const result = await userService.deleteUser(request.params.code);
+
+    return { data: result };
+  }
+}

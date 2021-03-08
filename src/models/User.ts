@@ -37,8 +37,8 @@ function updateUser(code: string, userData: UserType) {
   return api.colls.users.updateOne({ code: code }, userData)
 }
 
-function deleteUser(_id: number) {
-
+function deleteUser(code: string) {
+  return api.colls.users.deleteOne({ code: code });
 }
 
 export default {
