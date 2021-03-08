@@ -51,13 +51,27 @@ export async function updateProduct(params: any) {
     throw new Error(`Product with code ${code} does not exist!`);
   }
 
-  const updateDoc = {
-    name: name !== undefined ? name : product.name,
-    vendor: vendor !== undefined ? vendor : product.vendor,
-    qty_in_store: qty_in_store !== undefined ? qty_in_store : product.qty_in_store,
-    rate: rate !== undefined ? rate : product.rate,
-    unit: unit !== undefined ? unit : product.unit
-  };
+  let updateDoc = {};
+
+  if (name) {
+    updateDoc['name'] = name;
+  }
+
+  if (vendor) {
+    updateDoc['vendor'] = vendor;
+  }
+
+  if (qty_in_store) {
+    updateDoc['qty_in_store'] = qty_in_store;
+  }
+
+  if (rate) {
+    updateDoc['rate'] = rate;
+  }
+
+  if (unit) {
+    updateDoc['unit'] = unit;
+  }
 
   await ProductModel.updateProductByCode(
     code,
