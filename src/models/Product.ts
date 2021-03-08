@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const db = require('../config/mongoDB');
+import { api } from 'actionhero';
 
 export interface ProductType {
   code?: number,
@@ -10,45 +9,26 @@ export interface ProductType {
   unit?: string
 }
 
-const ProductSchema = mongoose.Schema({
-  code: {
-    type: Number,
-    unique: true
-  },
-  name: String,
-  vendor: String,
-  qty_in_store: Number,
-  rate: Number,
-  unit: String
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-const Product = mongoose.model('Product', ProductSchema);
-
 function findAllProducts() {
-  return Product.find();
+  return api.colls.products.find();
 }
 
 function findProductByCode(code: number) {
-  return Product.findOne({ code: code });
+  return api.colls.products.findOne({ code: code });
 }
 
 function createNewProduct(product: ProductType) {
-  const newProduct = new Product(product);
+  const newProduct = new api.colls.products(product);
 
   return newProduct.save();
 }
 
 function updateProductByCode(code: number, product: ProductType) {
-  return Product.updateOne({ code: code }, product);
+  return api.colls.products.updateOne({ code: code }, product);
 }
 
 function deleteProductByCode(code: number) {
-  return Product.deleteOne({ code: code });
+  return api.colls.products.deleteOne({ code: code });
 }
 
 export default {

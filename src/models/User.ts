@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const db = require('../config/mongoDB');
+import { api } from 'actionhero';
 
-import { USER_ROLES, ROLE_TYPE } from '../constants/miscs';
+import { ROLE_TYPE } from '../constants/miscs';
 
 export interface UserType {
   code?: string,
@@ -16,45 +15,20 @@ interface FiltersType {
   name?: string
 };
 
-const UserSchema = mongoose.Schema({
-  code: {
-    type: String,
-    unique: true
-  }, //format will be 'full_name_<count>'-> count = no. of user with same name.
-  email: {
-    type: String,
-    unique: true
-  },
-  name: String,
-  address: String,
-  dob: Date,
-  role: {
-    type: String,
-    enum: USER_ROLES
-  }
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-const User = mongoose.model('User', UserSchema);
-
 function findAllUsers(filters: FiltersType) {
-  return User.find(filters);
+  return api.colls.users.find(filters);
 }
 
 function findUserByCode(code: string) {
-  return User.findOne({ code: code });
+  return api.colls.users.findOne({ code: code });
 }
 
 function findUserByEmail(email: string) {
-  return User.findOne({ email: email });
+  return api.colls.users.findOne({ email: email });
 }
 
 function createUser(newUser: UserType) {
-  const NewUser = User(newUser);
+  const NewUser = api.colls.users(newUser);
 
   return NewUser.save();
 }
