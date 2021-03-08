@@ -41,3 +41,25 @@ export const ProductSchema = mongoose.Schema({
     updatedAt: 'updated_at'
   }
 });
+
+export const SaleSchema = mongoose.Schema({
+  user: {
+    code: String,
+    name: String
+  },
+  product: {
+    code: Number,
+    name: String,
+    vendor: String,
+    rate: Number,
+    unit: String
+  },
+  qty: Number,
+  discount: Number,
+  total: Number
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: false
+  }
+});

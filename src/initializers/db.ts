@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 import { dbPath, dbOptions, dbName } from '../config/mongoDB';
 import {
+  SaleSchema,
   UserSchema,
   ProductSchema
 } from '../models/schemas';
@@ -22,7 +23,8 @@ class DbInitializer extends Initializer {
     api.mongoDb.connect(dbPath, dbOptions);
     api.colls = {
       users: api.mongoDb.connection.model('User', UserSchema),
-      products: api.mongoDb.connection.model('Product', ProductSchema)
+      products: api.mongoDb.connection.model('Product', ProductSchema),
+      sales: api.mongoDb.connection.model('Sale', SaleSchema)
     }
     api.mongoDb.connection
       .on(

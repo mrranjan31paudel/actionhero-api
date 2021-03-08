@@ -1,15 +1,76 @@
-export function readAllSales() {
+import SaleModel from "../models/Sale";
+import UserModel from "../models/User";
+import ProductModel from "../models/Product";
 
+export async function readAllSales() {
+  const data = await SaleModel.findAllSales({});
+
+  const formattedData = data.map(doc => {
+    const newDoc = { ...doc._doc };
+    delete newDoc.__v;
+
+    return newDoc;
+  });
+
+  return formattedData;
 }
 
-export function readSale() {
+export async function readSaleById(id: string) {
+  const sale = await SaleModel.findSaleById(id);
 
+  if (!sale) {
+    throw new Error('Sale record not found!');
+  }
+
+  const formattedData = { ...sale._doc };
+  delete formattedData.__v;
+
+  return formattedData;
 }
 
-export function createSale() {
+export async function createSale(params: any) {
+  const { user_code, product_code, qty, discount, total } = params;
 
+  const user = await UserModel.findUserByCode(user_code);
+  if (!user) {
+    throw new Error('User does not exist!');
+  }
+
+  const product = await ProductModel.findProductByCode(product_code);
+  if (!product) {
+    throw new Error('Product does not exist!');
+  }
+
+  const newSale = {
+    user: {
+      code: user.code,
+      name: user.name
+    },
+    product: {
+      code: product.code,
+      name: product.name,
+      vendor: product.vendor,
+      rate: product.rate,
+      unit: product.unit
+    },
+    qty,
+    discount,
+    total
+  }
+
+  await SaleModel.createNewSale(newSale);
+
+  return `Saved sale record!`;
 }
 
-export function deleteSale() {
+export async function deleteSale(id: string) {
+  const sale = await SaleModel.findSaleById(id);
 
+  if (!sale) {
+    throw new Error(`Sale record does not exist!`);
+  }
+
+  await SaleModel.deleteSaleById(id);
+
+  return 'Sale record deleted!';
 }

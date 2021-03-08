@@ -100,11 +100,14 @@ export const DEFAULT = {
         { path: '/users', action: 'getAllUsersAction' },
         { path: '/user', action: 'getUserAction' },
         { path: '/products', action: 'getAllProductsAction' },
-        { path: '/product', action: 'getProductAction' }
+        { path: '/product', action: 'getProductAction' },
+        { path: '/sales', action: 'getAllSalesAction' },
+        { path: '/sale', action: 'getSaleAction' }
       ],
       post: [
         { path: '/user', action: 'createUserAction' },
-        { path: '/product', action: 'createProductAction' }
+        { path: '/product', action: 'createProductAction' },
+        { path: '/sale', action: 'createSaleAction' }
       ],
       put: [
         { path: '/user', action: 'updateUserAction' },
@@ -112,7 +115,8 @@ export const DEFAULT = {
       ],
       delete: [
         { path: '/user', action: 'deleteUserAction' },
-        { path: '/product', action: 'deleteProductAction' }
+        { path: '/product', action: 'deleteProductAction' },
+        { path: '/sale', action: 'deleteSaleAction' }
       ]
     }
   }
