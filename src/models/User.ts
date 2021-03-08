@@ -33,8 +33,8 @@ function createUser(newUser: UserType) {
   return NewUser.save();
 }
 
-function updateUser(user: UserType) {
-
+function updateUser(code: string, userData: UserType) {
+  return api.colls.users.updateOne({ code: code }, userData)
 }
 
 function deleteUser(_id: number) {

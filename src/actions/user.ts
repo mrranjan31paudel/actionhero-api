@@ -4,7 +4,7 @@ import validateDate from '../validators/date';
 import validateEmail from '../validators/email';
 import {
   validateStringType,
-  validateStringLength
+  validateMinStringLength
 } from '../validators/string';
 
 import * as userService from '../services/user';
@@ -58,7 +58,7 @@ export class CreateUser extends Action {
       },
       name: {
         required: true,
-        validator: val => validateStringLength(val, 3, 'name')
+        validator: val => validateMinStringLength(val, 3, 'name')
       },
       dob: {
         required: true,
@@ -66,13 +66,46 @@ export class CreateUser extends Action {
       },
       address: {
         required: true,
-        validator: val => validateStringLength(val, 3, 'address')
+        validator: val => validateMinStringLength(val, 3, 'address')
       }
     }
   }
 
   async run(request) {
     const result = await userService.createUser(request.params);
+
+    return { data: result };
+  }
+}
+
+export class UpdateUser extends Action {
+  constructor() {
+    super();
+
+    this.name = "updateUserAction";
+    this.inputs = {
+      code: {
+        required: true,
+        validator: val => validateStringType(val, 'code')
+      },
+      name: {
+        required: false,
+        validator: val => validateMinStringLength(val, 3, 'name')
+      },
+      dob: {
+        required: false,
+        validator: validateDate
+      },
+      address: {
+        required: false,
+        validator: val => validateMinStringLength(val, 3, 'address')
+      }
+    };
+    this.description = "Updates specified user, only for ADMIN!";
+  }
+
+  async run(request) {
+    const result = await userService.updateUser(request.params);
 
     return { data: result };
   }

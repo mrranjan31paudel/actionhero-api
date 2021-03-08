@@ -49,8 +49,32 @@ export async function createUser(params: any) {
   return `New user created= ${newUser._id}`;
 }
 
-export function updateUser() {
-  //check if user is admin or not
+export async function updateUser(params: any) {
+  const { code, name, dob, address } = params;
+
+  const user = await UserModel.findUserByCode(code);
+
+  if (!user) {
+    throw new Error('User does not exist!');
+  }
+
+  let newUserData = {};
+
+  if (name) {
+    newUserData['name'] = name;
+  }
+
+  if (dob) {
+    newUserData['dob'] = dob;
+  }
+
+  if (address) {
+    newUserData['address'] = address;
+  }
+
+  await UserModel.updateUser(code, newUserData);
+
+  return `User ${code} updated!`;
 }
 
 export function deleteUser() {
