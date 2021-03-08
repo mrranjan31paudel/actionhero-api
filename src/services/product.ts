@@ -59,14 +59,10 @@ export async function updateProduct(params: any) {
     unit: unit !== undefined ? unit : product.unit
   };
 
-  console.log(updateDoc);
-
-  const data = await ProductModel.updateProductByCode(
+  await ProductModel.updateProductByCode(
     code,
     updateDoc
   );
-
-  console.log(data);
 
   return `Product ${code} updated!`;
 }
