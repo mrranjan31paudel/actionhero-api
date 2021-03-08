@@ -17,10 +17,10 @@ export function validateStringType(value: any, label: string) {
  * @param length Threshold length
  * @param label Label or key of value
  */
-export function validateStringLength(value: string, length: number, label: string) {
+export function validateMinStringLength(value: string, length: number, label: string) {
   validateStringType(value, label);
 
-  if (value.length !== length) {
+  if (value.length < length) {
     throw new Error(`'${label}' should be minimum of ${length} characters.`);
   }
 }
