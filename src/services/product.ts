@@ -1,5 +1,7 @@
 import ProductModel from "../models/Product";
 
+import { AlreadyExistsError, NotFoundError } from "../utils/errors";
+
 export async function readAllProducts() {
   const data = await ProductModel.findAllProducts();
 
@@ -17,7 +19,7 @@ export async function readProduct(code: number) {
   const product = await ProductModel.findProductByCode(code);
 
   if (!product) {
-    throw new Error("Product not found!");
+    throw new NotFoundError("Product not found!");
   }
 
   const trimmedProduct = { ...product._doc };
@@ -32,9 +34,7 @@ export async function createProduct(params: any) {
   const product = await ProductModel.findProductByCode(code);
 
   if (product) {
-    throw new Error(
-      `Code: ${code} is already assigned for '${product.name}' from vendor '${product.vendor}'.`
-    );
+    throw new AlreadyExistsError(`Product with code ${code} already exists!`);
   }
 
   const data = await ProductModel.createNewProduct({
@@ -55,7 +55,7 @@ export async function updateProduct(params: any) {
   const product = await ProductModel.findProductByCode(code);
 
   if (!product) {
-    throw new Error(`Product with code ${code} does not exist!`);
+    throw new NotFoundError(`Product with code ${code} does not exist!`);
   }
 
   let updateDoc = {};
@@ -89,7 +89,7 @@ export async function deleteProduct(code: number) {
   const product = await ProductModel.findProductByCode(code);
 
   if (!product) {
-    throw new Error(`Product ${code} does not exist!`);
+    throw new NotFoundError(`Product does not exist!`);
   }
 
   await ProductModel.deleteProductByCode(code);

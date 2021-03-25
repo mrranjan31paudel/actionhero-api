@@ -2,6 +2,8 @@ import SaleModel from "../models/Sale";
 import UserModel from "../models/User";
 import ProductModel from "../models/Product";
 
+import { NotFoundError } from "../utils/errors";
+
 export async function readAllSales() {
   const data = await SaleModel.findAllSales({});
 
@@ -19,7 +21,7 @@ export async function readSaleById(id: string) {
   const sale = await SaleModel.findSaleById(id);
 
   if (!sale) {
-    throw new Error("Sale record not found!");
+    throw new NotFoundError("Sale record not found!");
   }
 
   const formattedData = { ...sale._doc };
@@ -33,12 +35,12 @@ export async function createSale(params: any) {
 
   const user = await UserModel.findUserByCode(user_code);
   if (!user) {
-    throw new Error("User does not exist!");
+    throw new NotFoundError("User does not exist!");
   }
 
   const product = await ProductModel.findProductByCode(product_code);
   if (!product) {
-    throw new Error("Product does not exist!");
+    throw new NotFoundError("Product does not exist!");
   }
 
   const newSale = {
@@ -67,7 +69,7 @@ export async function deleteSale(id: string) {
   const sale = await SaleModel.findSaleById(id);
 
   if (!sale) {
-    throw new Error(`Sale record does not exist!`);
+    throw new NotFoundError(`Sale record does not exist!`);
   }
 
   await SaleModel.deleteSaleById(id);

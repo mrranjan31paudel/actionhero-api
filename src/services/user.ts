@@ -1,5 +1,7 @@
 import UserModel from "../models/User";
 
+import { AlreadyExistsError, NotFoundError } from "../utils/errors";
+
 export async function readAllUsers() {
   //check if user is admin or not *It seems verfication with a middleware will be better*
   const data = await UserModel.findAllUsers({});
@@ -19,7 +21,7 @@ export async function readUserByCode(code: string) {
   const user = await UserModel.findUserByCode(code);
 
   if (!user) {
-    throw new Error("User not found!");
+    throw new NotFoundError("User not found!");
   }
 
   const formattedUserData = { ...user._doc };
@@ -35,7 +37,7 @@ export async function createUser(params: any) {
   const user = await UserModel.findUserByEmail(email);
 
   if (user && user._doc) {
-    throw new Error("User already exists. E-mail already registered.");
+    throw new AlreadyExistsError("Email already in use!");
   }
 
   const users = await UserModel.findAllUsers({ name: name });
@@ -61,7 +63,7 @@ export async function updateUser(params: any) {
   const user = await UserModel.findUserByCode(code);
 
   if (!user) {
-    throw new Error("User does not exist!");
+    throw new NotFoundError("User does not exist!");
   }
 
   let newUserData = {};
@@ -87,7 +89,7 @@ export async function deleteUser(code: string) {
   const user = await UserModel.findUserByCode(code);
 
   if (!user) {
-    throw new Error(`User does not exist!`);
+    throw new NotFoundError(`User does not exist!`);
   }
 
   await UserModel.deleteUser(code);
