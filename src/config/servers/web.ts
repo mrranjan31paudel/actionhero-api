@@ -97,6 +97,7 @@ export const DEFAULT = {
   routes: config => {
     return {
       get: [
+        { path: '/status', action: 'status' },
         { path: '/users', action: 'getAllUsersAction' },
         { path: '/user', action: 'getUserAction' },
         { path: '/products', action: 'getAllProductsAction' },
