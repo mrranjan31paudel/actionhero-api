@@ -1,18 +1,16 @@
-import { Action } from 'actionhero';
+import { Action } from "actionhero";
 
-import {
-  validateStringType
-} from '../validators/string';
-import validateNumberType from '../validators/number';
+import { validateStringType } from "../validators/string";
+import validateNumberType from "../validators/number";
 
-import * as saleService from '../services/sale';
+import * as saleService from "../services/sale";
 
 export class ReadAllSales extends Action {
   constructor() {
     super();
 
-    this.name = 'getAllSalesAction';
-    this.description = 'Get all sales.'
+    this.name = "getAllSalesAction";
+    this.description = "Get all sales.";
   }
 
   async run() {
@@ -26,14 +24,14 @@ export class ReadSale extends Action {
   constructor() {
     super();
 
-    this.name = 'getSaleAction';
-    this.description = 'Get single sale.';
+    this.name = "getSaleAction";
+    this.description = "Get single sale.";
     this.inputs = {
       id: {
         required: true,
-        validator: val => validateStringType(val, 'id')
-      }
-    }
+        validator: (val) => validateStringType(val, "id"),
+      },
+    };
   }
 
   async run(request) {
@@ -47,30 +45,30 @@ export class CreateSale extends Action {
   constructor() {
     super();
 
-    this.name = 'createSaleAction';
-    this.description = 'Creates new sale.';
+    this.name = "createSaleAction";
+    this.description = "Creates new sale.";
     this.inputs = {
       user_code: {
         required: true,
-        validator: val => validateStringType(val, 'user_code')
+        validator: (val) => validateStringType(val, "user_code"),
       },
       product_code: {
         required: true,
-        validator: val => validateNumberType(val, 'product_code')
+        validator: (val) => validateNumberType(val, "product_code"),
       },
       qty: {
         required: true,
-        validator: val => validateNumberType(val, 'qty')
+        validator: (val) => validateNumberType(val, "qty"),
       },
       discount: {
         required: true,
-        validator: val => validateNumberType(val, 'discount')
+        validator: (val) => validateNumberType(val, "discount"),
       },
       total: {
         required: true,
-        validator: val => validateNumberType(val, 'total')
-      }
-    }
+        validator: (val) => validateNumberType(val, "total"),
+      },
+    };
   }
 
   async run(request) {
@@ -88,9 +86,9 @@ export class DeleteSale extends Action {
     this.inputs = {
       id: {
         required: true,
-        validator: val => validateStringType(val, 'code')
-      }
-    }
+        validator: (val) => validateStringType(val, "code"),
+      },
+    };
     this.description = "Deletes specified sale!";
   }
 

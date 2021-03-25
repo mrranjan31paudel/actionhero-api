@@ -1,6 +1,6 @@
-import * as moment from 'moment';
+import * as moment from "moment";
 
-import { DATE_REGEXP, STANDARD_DATE_FORMAT } from '../constants/miscs';
+import { DATE_REGEXP, STANDARD_DATE_FORMAT } from "../constants/miscs";
 
 /**
  * Check the date format to be standard

@@ -5,7 +5,7 @@ import ProductModel from "../models/Product";
 export async function readAllSales() {
   const data = await SaleModel.findAllSales({});
 
-  const formattedData = data.map(doc => {
+  const formattedData = data.map((doc) => {
     const newDoc = { ...doc._doc };
     delete newDoc.__v;
 
@@ -19,7 +19,7 @@ export async function readSaleById(id: string) {
   const sale = await SaleModel.findSaleById(id);
 
   if (!sale) {
-    throw new Error('Sale record not found!');
+    throw new Error("Sale record not found!");
   }
 
   const formattedData = { ...sale._doc };
@@ -33,30 +33,30 @@ export async function createSale(params: any) {
 
   const user = await UserModel.findUserByCode(user_code);
   if (!user) {
-    throw new Error('User does not exist!');
+    throw new Error("User does not exist!");
   }
 
   const product = await ProductModel.findProductByCode(product_code);
   if (!product) {
-    throw new Error('Product does not exist!');
+    throw new Error("Product does not exist!");
   }
 
   const newSale = {
     user: {
       code: user.code,
-      name: user.name
+      name: user.name,
     },
     product: {
       code: product.code,
       name: product.name,
       vendor: product.vendor,
       rate: product.rate,
-      unit: product.unit
+      unit: product.unit,
     },
     qty,
     discount,
-    total
-  }
+    total,
+  };
 
   await SaleModel.createNewSale(newSale);
 
@@ -72,5 +72,5 @@ export async function deleteSale(id: string) {
 
   await SaleModel.deleteSaleById(id);
 
-  return 'Sale record deleted!';
+  return "Sale record deleted!";
 }

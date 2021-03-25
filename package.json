@@ -18,7 +18,7 @@
   "devDependencies": {
     "@types/jest": "latest",
     "@types/node": "latest",
-    "husky": "^5.2.0",
+    "husky": "^4.3.8",
     "jest": "latest",
     "prettier": "latest",
     "ts-jest": "latest",
@@ -39,7 +39,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run pretty"
+      "pre-commit": "npm run pretty && git add src/"
     }
   },
   "jest": {

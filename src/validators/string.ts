@@ -1,4 +1,4 @@
-import { isString } from '../utils/string';
+import { isString } from "../utils/string";
 
 /**
  * Validate string type
@@ -17,7 +17,11 @@ export function validateStringType(value: any, label: string) {
  * @param length Threshold length
  * @param label Label or key of value
  */
-export function validateMinStringLength(value: string, length: number, label: string) {
+export function validateMinStringLength(
+  value: string,
+  length: number,
+  label: string
+) {
   validateStringType(value, label);
 
   if (value.length < length) {

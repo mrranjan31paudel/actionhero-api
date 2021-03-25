@@ -1,5 +1,3 @@
-import { User, UserType } from "../models/User"
+import { User, UserType } from "../models/User";
 
-export function isAthorizedUser(id: number) {
-
-}
+export function isAthorizedUser(id: number) {}

@@ -1,20 +1,20 @@
-import { Action } from 'actionhero';
+import { Action } from "actionhero";
 
-import validateDate from '../validators/date';
-import validateEmail from '../validators/email';
+import validateDate from "../validators/date";
+import validateEmail from "../validators/email";
 import {
   validateStringType,
-  validateMinStringLength
-} from '../validators/string';
+  validateMinStringLength,
+} from "../validators/string";
 
-import * as userService from '../services/user';
+import * as userService from "../services/user";
 
 export class ReadAllUsers extends Action {
   constructor() {
     super();
 
-    this.name = 'getAllUsersAction';
-    this.description = 'Get all users. Only available for ADMIN.'
+    this.name = "getAllUsersAction";
+    this.description = "Get all users. Only available for ADMIN.";
   }
 
   async run() {
@@ -28,14 +28,14 @@ export class ReadUser extends Action {
   constructor() {
     super();
 
-    this.name = 'getUserAction';
-    this.description = 'Get single user. Only available for ADMIN and owner.';
+    this.name = "getUserAction";
+    this.description = "Get single user. Only available for ADMIN and owner.";
     this.inputs = {
       code: {
         required: true,
-        validator: val => validateStringType(val, 'code')
-      }
-    }
+        validator: (val) => validateStringType(val, "code"),
+      },
+    };
   }
 
   async run(request) {
@@ -49,26 +49,26 @@ export class CreateUser extends Action {
   constructor() {
     super();
 
-    this.name = 'createUserAction';
-    this.description = 'Creates new user. Only available for ADMIN';
+    this.name = "createUserAction";
+    this.description = "Creates new user. Only available for ADMIN";
     this.inputs = {
       email: {
         required: true,
-        validator: validateEmail
+        validator: validateEmail,
       },
       name: {
         required: true,
-        validator: val => validateMinStringLength(val, 3, 'name')
+        validator: (val) => validateMinStringLength(val, 3, "name"),
       },
       dob: {
         required: true,
-        validator: validateDate
+        validator: validateDate,
       },
       address: {
         required: true,
-        validator: val => validateMinStringLength(val, 3, 'address')
-      }
-    }
+        validator: (val) => validateMinStringLength(val, 3, "address"),
+      },
+    };
   }
 
   async run(request) {
@@ -86,20 +86,20 @@ export class UpdateUser extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: val => validateStringType(val, 'code')
+        validator: (val) => validateStringType(val, "code"),
       },
       name: {
         required: false,
-        validator: val => validateMinStringLength(val, 3, 'name')
+        validator: (val) => validateMinStringLength(val, 3, "name"),
       },
       dob: {
         required: false,
-        validator: validateDate
+        validator: validateDate,
       },
       address: {
         required: false,
-        validator: val => validateMinStringLength(val, 3, 'address')
-      }
+        validator: (val) => validateMinStringLength(val, 3, "address"),
+      },
     };
     this.description = "Updates specified user, only for ADMIN!";
   }
@@ -119,9 +119,9 @@ export class DeleteUser extends Action {
     this.inputs = {
       code: {
         required: true,
-        validator: val => validateStringType(val, 'code')
-      }
-    }
+        validator: (val) => validateStringType(val, "code"),
+      },
+    };
     this.description = "Deletes specified user, only for ADMIN!";
   }
 

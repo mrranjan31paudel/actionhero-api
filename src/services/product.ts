@@ -1,9 +1,9 @@
-import ProductModel from '../models/Product'
+import ProductModel from "../models/Product";
 
 export async function readAllProducts() {
   const data = await ProductModel.findAllProducts();
 
-  const formattedData = data.map(doc => {
+  const formattedData = data.map((doc) => {
     const newDoc = { ...doc._doc };
     delete newDoc.__v;
 
@@ -17,7 +17,7 @@ export async function readProduct(code: number) {
   const product = await ProductModel.findProductByCode(code);
 
   if (!product) {
-    throw new Error('Product not found!');
+    throw new Error("Product not found!");
   }
 
   const trimmedProduct = { ...product._doc };
@@ -32,11 +32,18 @@ export async function createProduct(params: any) {
   const product = await ProductModel.findProductByCode(code);
 
   if (product) {
-    throw new Error(`Code: ${code} is already assigned for '${product.name}' from vendor '${product.vendor}'.`);
+    throw new Error(
+      `Code: ${code} is already assigned for '${product.name}' from vendor '${product.vendor}'.`
+    );
   }
 
   const data = await ProductModel.createNewProduct({
-    code, name, vendor, qty_in_store, rate, unit
+    code,
+    name,
+    vendor,
+    qty_in_store,
+    rate,
+    unit,
   });
 
   return `New product created: ID = ${data._id}`;
@@ -54,29 +61,26 @@ export async function updateProduct(params: any) {
   let updateDoc = {};
 
   if (name) {
-    updateDoc['name'] = name;
+    updateDoc["name"] = name;
   }
 
   if (vendor) {
-    updateDoc['vendor'] = vendor;
+    updateDoc["vendor"] = vendor;
   }
 
   if (qty_in_store) {
-    updateDoc['qty_in_store'] = qty_in_store;
+    updateDoc["qty_in_store"] = qty_in_store;
   }
 
   if (rate) {
-    updateDoc['rate'] = rate;
+    updateDoc["rate"] = rate;
   }
 
   if (unit) {
-    updateDoc['unit'] = unit;
+    updateDoc["unit"] = unit;
   }
 
-  await ProductModel.updateProductByCode(
-    code,
-    updateDoc
-  );
+  await ProductModel.updateProductByCode(code, updateDoc);
 
   return `Product ${code} updated!`;
 }

@@ -1,21 +1,21 @@
-import { api } from 'actionhero';
+import { api } from "actionhero";
 
 export interface SaleType {
   user?: {
-    code?: string,
-    name?: string
-  },
+    code?: string;
+    name?: string;
+  };
   product?: {
-    code?: number,
-    name?: string,
-    vendor?: string,
-    rate?: number,
-    unit?: string
-  },
-  qty?: number,
-  discount?: number,
-  total?: number
-};
+    code?: number;
+    name?: string;
+    vendor?: string;
+    rate?: number;
+    unit?: string;
+  };
+  qty?: number;
+  discount?: number;
+  total?: number;
+}
 
 function findAllSales(filters: any) {
   return api.colls.sales.find(filters);
@@ -39,5 +39,5 @@ export default {
   findAllSales,
   createNewSale,
   findSaleById,
-  deleteSaleById
+  deleteSaleById,
 };

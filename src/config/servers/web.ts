@@ -42,8 +42,8 @@ export const DEFAULT = {
         // automaticRoutes should an array of strings - HTTP verbs, ie: [] (default), ['get'], ['post'], ['get','put'], ['get','post','put'], etc.
         automaticRoutes: process.env.AUTOMATIC_ROUTES
           ? process.env.AUTOMATIC_ROUTES.split(",")
-            .map((v) => v.trim())
-            .map((v) => v.toLowerCase())
+              .map((v) => v.trim())
+              .map((v) => v.toLowerCase())
           : [],
         // The cache or (if etags are enabled) next-revalidation time to be returned for all flat files served from /public; defined in seconds
         flatFileCacheDuration: 60,
@@ -94,33 +94,33 @@ export const DEFAULT = {
       };
     },
   },
-  routes: config => {
+  routes: (config) => {
     return {
       get: [
-        { path: '/status', action: 'status' },
-        { path: '/users', action: 'getAllUsersAction' },
-        { path: '/user', action: 'getUserAction' },
-        { path: '/products', action: 'getAllProductsAction' },
-        { path: '/product', action: 'getProductAction' },
-        { path: '/sales', action: 'getAllSalesAction' },
-        { path: '/sale', action: 'getSaleAction' }
+        { path: "/status", action: "status" },
+        { path: "/users", action: "getAllUsersAction" },
+        { path: "/user", action: "getUserAction" },
+        { path: "/products", action: "getAllProductsAction" },
+        { path: "/product", action: "getProductAction" },
+        { path: "/sales", action: "getAllSalesAction" },
+        { path: "/sale", action: "getSaleAction" },
       ],
       post: [
-        { path: '/user', action: 'createUserAction' },
-        { path: '/product', action: 'createProductAction' },
-        { path: '/sale', action: 'createSaleAction' }
+        { path: "/user", action: "createUserAction" },
+        { path: "/product", action: "createProductAction" },
+        { path: "/sale", action: "createSaleAction" },
       ],
       put: [
-        { path: '/user', action: 'updateUserAction' },
-        { path: '/product', action: 'updateProductAction' }
+        { path: "/user", action: "updateUserAction" },
+        { path: "/product", action: "updateProductAction" },
       ],
       delete: [
-        { path: '/user', action: 'deleteUserAction' },
-        { path: '/product', action: 'deleteProductAction' },
-        { path: '/sale', action: 'deleteSaleAction' }
-      ]
-    }
-  }
+        { path: "/user", action: "deleteUserAction" },
+        { path: "/product", action: "deleteProductAction" },
+        { path: "/sale", action: "deleteSaleAction" },
+      ],
+    };
+  },
 };
 
 export const production = {

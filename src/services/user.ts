@@ -4,7 +4,7 @@ export async function readAllUsers() {
   //check if user is admin or not *It seems verfication with a middleware will be better*
   const data = await UserModel.findAllUsers({});
 
-  const formattedData = data.map(doc => {
+  const formattedData = data.map((doc) => {
     const newDoc = { ...doc._doc };
     delete newDoc.__v;
 
@@ -19,7 +19,7 @@ export async function readUserByCode(code: string) {
   const user = await UserModel.findUserByCode(code);
 
   if (!user) {
-    throw new Error('User not found!');
+    throw new Error("User not found!");
   }
 
   const formattedUserData = { ...user._doc };
@@ -35,15 +35,21 @@ export async function createUser(params: any) {
   const user = await UserModel.findUserByEmail(email);
 
   if (user && user._doc) {
-    throw new Error('User already exists. E-mail already registered.');
+    throw new Error("User already exists. E-mail already registered.");
   }
 
   const users = await UserModel.findAllUsers({ name: name });
   const noOfUsers = users.length || 0;
-  const code = name.toLowerCase().replace(/ /g, '_') + '_' + String(noOfUsers + 1);
+  const code =
+    name.toLowerCase().replace(/ /g, "_") + "_" + String(noOfUsers + 1);
 
   const newUser = await UserModel.createUser({
-    email, code, name, dob, address, role: 'SALES_PERSON'
+    email,
+    code,
+    name,
+    dob,
+    address,
+    role: "SALES_PERSON",
   });
 
   return `New user created= ${newUser._id}`;
@@ -55,21 +61,21 @@ export async function updateUser(params: any) {
   const user = await UserModel.findUserByCode(code);
 
   if (!user) {
-    throw new Error('User does not exist!');
+    throw new Error("User does not exist!");
   }
 
   let newUserData = {};
 
   if (name) {
-    newUserData['name'] = name;
+    newUserData["name"] = name;
   }
 
   if (dob) {
-    newUserData['dob'] = dob;
+    newUserData["dob"] = dob;
   }
 
   if (address) {
-    newUserData['address'] = address;
+    newUserData["address"] = address;
   }
 
   await UserModel.updateUser(code, newUserData);
@@ -86,5 +92,5 @@ export async function deleteUser(code: string) {
 
   await UserModel.deleteUser(code);
 
-  return 'User deleted!';
+  return "User deleted!";
 }

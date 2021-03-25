@@ -1,12 +1,12 @@
-import { api } from 'actionhero';
+import { api } from "actionhero";
 
 export interface ProductType {
-  code?: number,
-  name?: string,
-  vendor?: string,
-  qty_in_store?: number,
-  rate?: number,
-  unit?: string
+  code?: number;
+  name?: string;
+  vendor?: string;
+  qty_in_store?: number;
+  rate?: number;
+  unit?: string;
 }
 
 function findAllProducts() {
@@ -36,5 +36,5 @@ export default {
   createNewProduct,
   findProductByCode,
   updateProductByCode,
-  deleteProductByCode
+  deleteProductByCode,
 };

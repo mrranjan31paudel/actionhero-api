@@ -1,19 +1,19 @@
-import { api } from 'actionhero';
+import { api } from "actionhero";
 
-import { ROLE_TYPE } from '../constants/miscs';
+import { ROLE_TYPE } from "../constants/miscs";
 
 export interface UserType {
-  code?: string,
-  email?: string,
-  name?: string,
-  address?: string,
-  dob?: Date,
-  role?: ROLE_TYPE
-};
+  code?: string;
+  email?: string;
+  name?: string;
+  address?: string;
+  dob?: Date;
+  role?: ROLE_TYPE;
+}
 
 interface FiltersType {
-  name?: string
-};
+  name?: string;
+}
 
 function findAllUsers(filters: FiltersType) {
   return api.colls.users.find(filters);
@@ -34,7 +34,7 @@ function createUser(newUser: UserType) {
 }
 
 function updateUser(code: string, userData: UserType) {
-  return api.colls.users.updateOne({ code: code }, userData)
+  return api.colls.users.updateOne({ code: code }, userData);
 }
 
 function deleteUser(code: string) {
@@ -47,5 +47,5 @@ export default {
   findUserByEmail,
   createUser,
   updateUser,
-  deleteUser
-}
+  deleteUser,
+};

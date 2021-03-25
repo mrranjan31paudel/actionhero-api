@@ -1,18 +1,14 @@
-import { Initializer, api } from 'actionhero';
-const mongoose = require('mongoose');
+import { Initializer, api } from "actionhero";
+const mongoose = require("mongoose");
 
-import { dbPath, dbOptions, dbName } from '../config/mongoDB';
-import {
-  SaleSchema,
-  UserSchema,
-  ProductSchema
-} from '../models/schemas';
+import { dbPath, dbOptions, dbName } from "../config/mongoDB";
+import { SaleSchema, UserSchema, ProductSchema } from "../models/schemas";
 
 class DbInitializer extends Initializer {
   constructor() {
     super();
 
-    this.name = 'mongoInitializer';
+    this.name = "mongoInitializer";
   }
 
   async initialize() {
@@ -22,23 +18,20 @@ class DbInitializer extends Initializer {
   async start() {
     api.mongoDb.connect(dbPath, dbOptions);
     api.colls = {
-      users: api.mongoDb.connection.model('User', UserSchema),
-      products: api.mongoDb.connection.model('Product', ProductSchema),
-      sales: api.mongoDb.connection.model('Sale', SaleSchema)
-    }
-    api.mongoDb.connection
-      .on(
-        'error',
-        console.error.bind(console, 'MongoDB Error:')
-      );
-    api.mongoDb.connection
-      .once('open', function () {
-        console.log(`Connected to "${dbName}" database`);
-      });
-    api.mongoDb.connection
-      .once('close', function () {
-        console.log(`Connection to "${dbName}" database closed!`);
-      });
+      users: api.mongoDb.connection.model("User", UserSchema),
+      products: api.mongoDb.connection.model("Product", ProductSchema),
+      sales: api.mongoDb.connection.model("Sale", SaleSchema),
+    };
+    api.mongoDb.connection.on(
+      "error",
+      console.error.bind(console, "MongoDB Error:")
+    );
+    api.mongoDb.connection.once("open", function () {
+      console.log(`Connected to "${dbName}" database`);
+    });
+    api.mongoDb.connection.once("close", function () {
+      console.log(`Connection to "${dbName}" database closed!`);
+    });
   }
 
   async stop() {
