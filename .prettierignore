@@ -1,0 +1,14 @@
+# directories
+dist
+locales
+log
+node_modules
+pids
+public
+
+# files
+.env*
+.gitignore
+**/*.yaml
+**/*.json
+**/*.md
