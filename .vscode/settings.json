@@ -1,0 +1,5 @@
+{
+  "files.insertFinalNewline": true,
+  "files.eol": "auto",
+  "editor.tabSize": 2
+}
