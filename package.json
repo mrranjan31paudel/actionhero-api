@@ -37,6 +37,11 @@
     "lint": "prettier --check src/*/** __tests__/*/**",
     "pretty": "prettier --write src/*/** __tests__/*/**"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pretty"
+    }
+  },
   "jest": {
     "testEnvironment": "node",
     "transform": {
