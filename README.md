@@ -3,7 +3,6 @@
 _visit [Actionhero](https://www.actionherojs.com) for more information_\
 <br />
 Departmental store management app.
-<br /><br />
 
 ## Setup:
 ### Installation
@@ -35,15 +34,13 @@ DB_USER="db_user_name"
 DB_NAME="your_db_name"
 DB_PASSWORD="db_password"
 ```
-<br />
 
 ## To Run:
 ### Run Build (from ./dist)
 `npm start`
 
 ### Dev
-`npm run dev`\
-<br />
+`npm run dev`
 
 ## To Test:
 
