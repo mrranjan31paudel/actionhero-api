@@ -1,6 +1,7 @@
 export const STANDARD_DATE_FORMAT = "YYYY-MM-DD";
 
 export const ALLOWED_UNITS = ["KG", "LTR", "PACK"];
+export const ALLOWED_GENDERS = ["F", "M", "O"];
 export const USER_ROLES = ["ADMIN", "SALES_PERSON"];
 
 export const DATE_REGEXP = /^\d\d\d\d-\d\d-\d\d$/;

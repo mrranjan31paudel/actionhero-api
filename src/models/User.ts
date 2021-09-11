@@ -6,6 +6,7 @@ export interface UserType {
   code?: string;
   email?: string;
   name?: string;
+  gender?: string;
   address?: string;
   dob?: Date;
   role?: ROLE_TYPE;

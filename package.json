@@ -8,12 +8,14 @@
   },
   "dependencies": {
     "actionhero": "24.0.0",
+    "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
     "ioredis": "latest",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.12.2",
     "winston": "latest",
-    "ws": "latest"
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "@types/jest": "latest",
@@ -22,7 +24,7 @@
     "jest": "latest",
     "prettier": "latest",
     "ts-jest": "latest",
-    "ts-node-dev": "latest",
+    "ts-node-dev": "^1.1.8",
     "typescript": "latest"
   },
   "scripts": {

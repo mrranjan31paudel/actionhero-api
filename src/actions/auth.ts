@@ -1,11 +1,16 @@
 import { Action } from "actionhero";
 
-class AuthAction extends Action {
+export class LogIn extends Action {
   constructor() {
     super();
 
-    this.name = "authAction";
+    this.name = "login";
+    this.inputs = {
+      email: { required: true },
+      password: { required: true },
+    };
+    this.description = "Login as a user";
   }
 
-  async run() {}
+  async run(data) {}
 }

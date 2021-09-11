@@ -2,6 +2,7 @@ import { Action } from "actionhero";
 
 import validateDate from "../validators/date";
 import validateEmail from "../validators/email";
+import validateGender from "../validators/gender";
 import {
   validateStringType,
   validateMinStringLength,
@@ -56,6 +57,10 @@ export class CreateUser extends Action {
         required: true,
         validator: validateEmail,
       },
+      password: {
+        required: true,
+        validator: (val) => validateMinStringLength(val, 8, "password"),
+      },
       name: {
         required: true,
         validator: (val) => validateMinStringLength(val, 3, "name"),
@@ -63,6 +68,10 @@ export class CreateUser extends Action {
       dob: {
         required: true,
         validator: validateDate,
+      },
+      gender: {
+        required: true,
+        validator: validateGender,
       },
       address: {
         required: true,

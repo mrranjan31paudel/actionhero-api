@@ -31,8 +31,9 @@ export async function readUserByCode(code: string) {
 }
 
 export async function createUser(params: any) {
-  const { email, name, dob, address } = params;
-  //check if user is admin or not
+  const { email, name, dob, address, gender, password } = params;
+  //check if user is admin or not: TODO
+
   //check if user already exists
   const user = await UserModel.findUserByEmail(email);
 
@@ -50,6 +51,7 @@ export async function createUser(params: any) {
     code,
     name,
     dob,
+    gender,
     address,
     role: "SALES_PERSON",
   });
