@@ -11,4 +11,9 @@ export const db = {
 
 export const auth = {
   passwordSaltRounds: parseInt(process.env.PASSWORD_SALT_ROUNDS, 10),
+  jwt: {
+    secret: process.env.JWT_SECRET_KEY,
+    accessTokenLife: parseInt(process.env.JWT_ACCESS_TOKEN_LIFE, 10),
+    refreshTokenLife: parseInt(process.env.JWT_REFRESH_TOKEN_LIFE, 10),
+  },
 };
