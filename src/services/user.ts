@@ -6,38 +6,28 @@ export async function readAllUsers() {
   //check if user is admin or not *It seems verfication with a middleware will be better*
   const data = await UserModel.findAllUsers({});
 
-  const formattedData = data.map((doc) => {
-    const newDoc = { ...doc._doc };
-    delete newDoc.__v;
-
-    return newDoc;
-  });
-
-  return formattedData;
+  return data;
 }
 
 export async function readUserByCode(code: string) {
-  //check if user is admin or not
+  //check if user is the admin or the user him/herself or not
   const user = await UserModel.findUserByCode(code);
 
   if (!user) {
     throw new NotFoundError("User not found!");
   }
 
-  const formattedUserData = { ...user._doc };
-  delete formattedUserData.__v;
-
-  return formattedUserData;
+  return user;
 }
 
 export async function createUser(params: any) {
-  const { email, name, dob, address, gender, password } = params;
+  const { email, name, dob, address, gender } = params;
   //check if user is admin or not: TODO
 
   //check if user already exists
   const user = await UserModel.findUserByEmail(email);
 
-  if (user && user._doc) {
+  if (user !== null) {
     throw new AlreadyExistsError("Email already in use!");
   }
 

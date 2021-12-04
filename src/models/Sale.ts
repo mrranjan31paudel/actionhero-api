@@ -18,11 +18,11 @@ export interface SaleType {
 }
 
 function findAllSales(filters: any) {
-  return api.colls.sales.find(filters);
+  return api.colls.sales.find(filters).lean().exec();
 }
 
 function findSaleById(id: string) {
-  return api.colls.sales.findOne({ _id: id });
+  return api.colls.sales.findOne({ _id: id }).lean().exec();
 }
 
 function createNewSale(sale: SaleType) {
@@ -32,7 +32,7 @@ function createNewSale(sale: SaleType) {
 }
 
 function deleteSaleById(id: string) {
-  return api.colls.sales.deleteOne({ _id: id });
+  return api.colls.sales.deleteOne({ _id: id }).lean().exec();
 }
 
 export default {

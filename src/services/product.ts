@@ -5,14 +5,7 @@ import { AlreadyExistsError, NotFoundError } from "../utils/errors";
 export async function readAllProducts() {
   const data = await ProductModel.findAllProducts();
 
-  const formattedData = data.map((doc) => {
-    const newDoc = { ...doc._doc };
-    delete newDoc.__v;
-
-    return newDoc;
-  });
-
-  return formattedData;
+  return data;
 }
 
 export async function readProduct(code: number) {
@@ -22,10 +15,7 @@ export async function readProduct(code: number) {
     throw new NotFoundError("Product not found!");
   }
 
-  const trimmedProduct = { ...product._doc };
-  delete trimmedProduct.__v;
-
-  return trimmedProduct;
+  return product;
 }
 
 export async function createProduct(params: any) {

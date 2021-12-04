@@ -7,14 +7,7 @@ import { NotFoundError } from "../utils/errors";
 export async function readAllSales() {
   const data = await SaleModel.findAllSales({});
 
-  const formattedData = data.map((doc) => {
-    const newDoc = { ...doc._doc };
-    delete newDoc.__v;
-
-    return newDoc;
-  });
-
-  return formattedData;
+  return data;
 }
 
 export async function readSaleById(id: string) {
@@ -24,10 +17,7 @@ export async function readSaleById(id: string) {
     throw new NotFoundError("Sale record not found!");
   }
 
-  const formattedData = { ...sale._doc };
-  delete formattedData.__v;
-
-  return formattedData;
+  return sale;
 }
 
 export async function createSale(params: any) {
