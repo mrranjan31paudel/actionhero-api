@@ -67,7 +67,7 @@ export class CreateUser extends Action {
       },
       dob: {
         required: true,
-        validator: validateDate,
+        validator: (val) => validateDate(val, "dob"),
       },
       gender: {
         required: true,
@@ -103,7 +103,7 @@ export class UpdateUser extends Action {
       },
       dob: {
         required: false,
-        validator: validateDate,
+        validator: val => validateDate(val, 'dob'),
       },
       address: {
         required: false,
