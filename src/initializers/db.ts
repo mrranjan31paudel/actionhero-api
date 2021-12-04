@@ -2,7 +2,12 @@ import { Initializer, api } from "actionhero";
 const mongoose = require("mongoose");
 
 import { dbPath, dbOptions, dbName } from "../config/mongoDB";
-import { SaleSchema, UserSchema, ProductSchema } from "../models/schemas";
+import {
+  SaleSchema,
+  UserSchema,
+  ProductSchema,
+  AuthSchema,
+} from "../models/schemas";
 
 class DbInitializer extends Initializer {
   constructor() {
@@ -21,6 +26,7 @@ class DbInitializer extends Initializer {
       users: api.mongoDb.connection.model("User", UserSchema),
       products: api.mongoDb.connection.model("Product", ProductSchema),
       sales: api.mongoDb.connection.model("Sale", SaleSchema),
+      auth: api.mongoDb.connection.model("Auth", AuthSchema),
     };
     api.mongoDb.connection.on(
       "error",

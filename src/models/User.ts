@@ -17,15 +17,15 @@ interface FiltersType {
 }
 
 function findAllUsers(filters: FiltersType) {
-  return api.colls.users.find(filters);
+  return api.colls.users.find(filters).exec();
 }
 
-function findUserByCode(code: string) {
-  return api.colls.users.findOne({ code: code });
+function findUserByCode(code: string): UserType {
+  return api.colls.users.findOne({ code: code }).lean().exec();
 }
 
 function findUserByEmail(email: string) {
-  return api.colls.users.findOne({ email: email });
+  return api.colls.users.findOne({ email: email }).lean().exec();
 }
 
 function createUser(newUser: UserType) {
@@ -35,11 +35,11 @@ function createUser(newUser: UserType) {
 }
 
 function updateUser(code: string, userData: UserType) {
-  return api.colls.users.updateOne({ code: code }, userData);
+  return api.colls.users.updateOne({ code: code }, userData).lean().exec();
 }
 
 function deleteUser(code: string) {
-  return api.colls.users.deleteOne({ code: code });
+  return api.colls.users.deleteOne({ code: code }).lean().exec();
 }
 
 export default {

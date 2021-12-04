@@ -57,17 +57,13 @@ export class CreateUser extends Action {
         required: true,
         validator: validateEmail,
       },
-      password: {
-        required: true,
-        validator: (val) => validateMinStringLength(val, 8, "password"),
-      },
       name: {
         required: true,
         validator: (val) => validateMinStringLength(val, 3, "name"),
       },
       dob: {
         required: true,
-        validator: validateDate,
+        validator: (val) => validateDate(val, "dob"),
       },
       gender: {
         required: true,
@@ -103,7 +99,7 @@ export class UpdateUser extends Action {
       },
       dob: {
         required: false,
-        validator: validateDate,
+        validator: val => validateDate(val, 'dob'),
       },
       address: {
         required: false,
