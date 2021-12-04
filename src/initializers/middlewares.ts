@@ -21,7 +21,8 @@ export class AuthenticationMiddleware extends Initializer {
           data.connection.rawConnection.req.headers.authorization;
         let requestedAction = data.params.action;
 
-        if (["login", "refreshTokens"].includes(requestedAction)) return;
+        if (["loginAction", "refreshTokensAction"].includes(requestedAction))
+          return;
 
         if (!authorizationHeader || !authorizationHeader.includes("Bearer "))
           throw new ForbiddenError();
