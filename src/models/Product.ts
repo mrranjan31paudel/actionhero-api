@@ -10,11 +10,11 @@ export interface ProductType {
 }
 
 function findAllProducts() {
-  return api.colls.products.find();
+  return api.colls.products.find().lean().exec();
 }
 
 function findProductByCode(code: number) {
-  return api.colls.products.findOne({ code: code });
+  return api.colls.products.findOne({ code: code }).lean().exec();
 }
 
 function createNewProduct(product: ProductType) {
@@ -24,11 +24,11 @@ function createNewProduct(product: ProductType) {
 }
 
 function updateProductByCode(code: number, product: ProductType) {
-  return api.colls.products.updateOne({ code: code }, product);
+  return api.colls.products.updateOne({ code: code }, product).lean().exec();
 }
 
 function deleteProductByCode(code: number) {
-  return api.colls.products.deleteOne({ code: code });
+  return api.colls.products.deleteOne({ code: code }).lean().exec();
 }
 
 export default {
