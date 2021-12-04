@@ -72,3 +72,19 @@ export const SaleSchema = mongoose.Schema(
     },
   }
 );
+
+export const AuthSchema = mongoose.Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+    },
+    password: String,
+  },
+  {
+    timeStamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
+  }
+);

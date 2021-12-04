@@ -109,15 +109,20 @@ export const DEFAULT = {
         { path: "/user", action: "createUserAction" },
         { path: "/product", action: "createProductAction" },
         { path: "/sale", action: "createSaleAction" },
+        { path: "/auth/register", action: "registerUserCredentialAction" },
+        { path: "/auth/login", action: "loginAction" },
+        { path: "/auth/refresh", action: "refreshTokensAction" },
       ],
       put: [
         { path: "/user", action: "updateUserAction" },
         { path: "/product", action: "updateProductAction" },
+        { path: "/auth/update", action: "updateUserCredentialAction" },
       ],
       delete: [
         { path: "/user", action: "deleteUserAction" },
         { path: "/product", action: "deleteProductAction" },
         { path: "/sale", action: "deleteSaleAction" },
+        { path: "/auth/delete", action: "deleteUserCredentialAction" },
       ],
     };
   },
