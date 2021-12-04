@@ -87,6 +87,8 @@ export const DEFAULT = {
       // Any action that throws an Error will pass through this method before returning
       //   an error to the client. Response can be edited here, status codes changed, etc.
       async genericError(data, error) {
+        console.error(error);
+
         data.connection.rawConnection.responseHttpCode = error.code || 500;
         if (!error.code) {
           return new InternalError(); // return generic error if no code is specified.
