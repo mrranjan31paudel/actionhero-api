@@ -9,8 +9,12 @@ export interface ProductType {
   unit?: string;
 }
 
-function findAllProducts() {
-  return api.colls.products.find().lean().exec();
+function findAllProducts(filter: any = {}, sort?: any) {
+  let query = api.colls.products.find(filter);
+
+  if (sort !== null) query.sort(sort);
+
+  return query.lean().exec();
 }
 
 function findProductByCode(code: number) {
