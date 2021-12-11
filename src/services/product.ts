@@ -1,6 +1,7 @@
 import ProductModel from "../models/Product";
 
 import { AlreadyExistsError, NotFoundError } from "../utils/errors";
+import { DEFAULT_PAGE_NUM, DEFAULT_RECORDS_PER_PAGE } from "../constants/miscs";
 
 export async function readAllProducts(params: any) {
   const {
@@ -12,9 +13,13 @@ export async function readAllProducts(params: any) {
     qty_in_store = "",
     rate = "",
     unit = "",
+    pageNum = DEFAULT_PAGE_NUM,
+    pageSize = DEFAULT_RECORDS_PER_PAGE,
   } = params;
   let sort = null;
   let filter = {};
+  let requestedPageNum = parseInt(pageNum, 10);
+  let recordsPerPage = parseInt(pageSize, 10);
 
   if (!!sortBy && !!sortDir && ["asc", "desc"].includes(sortDir))
     sort = { [sortBy]: sortDir };
@@ -25,10 +30,24 @@ export async function readAllProducts(params: any) {
   if (!!name) filter["name"] = new RegExp(name, "i");
   if (!!vendor) filter["vendor"] = new RegExp(vendor, "i");
   if (!!unit) filter["unit"] = new RegExp(unit, "i");
+  if (requestedPageNum < 0) requestedPageNum = DEFAULT_PAGE_NUM;
+  if (recordsPerPage < 0) recordsPerPage = DEFAULT_RECORDS_PER_PAGE;
 
-  const data = await ProductModel.findAllProducts(filter, sort);
+  const offset = requestedPageNum * recordsPerPage;
+  const count = await ProductModel.countAllProducts(filter);
+  const records = await ProductModel.findAllProducts(
+    filter,
+    offset,
+    recordsPerPage,
+    sort
+  );
+  const pagination = {
+    totalRecords: count,
+    currentPageNum: requestedPageNum,
+    recordsPerPage: recordsPerPage,
+  };
 
-  return data;
+  return { records, pagination };
 }
 
 export async function readProduct(code: number) {
