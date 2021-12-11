@@ -4,6 +4,7 @@ import validateNumberType from "../validators/number";
 import validateUnit from "../validators/unit";
 
 import * as productServices from "../services/product";
+import { validateStringType } from "../validators/string";
 
 export class GetAllProducts extends Action {
   constructor() {
@@ -11,10 +12,44 @@ export class GetAllProducts extends Action {
 
     this.name = "getAllProductsAction";
     this.description = "Get all products";
+    this.inputs = {
+      sortBy: {
+        required: false,
+        validator: (val) => validateStringType(val, "sortBy"),
+      },
+      sortDir: {
+        required: false,
+        validator: (val) => validateStringType(val, "sortDir"),
+      },
+      code: {
+        required: false,
+        validator: (val) => validateNumberType(val, "code"),
+      },
+      name: {
+        required: false,
+        validator: (val) => validateStringType(val, "name"),
+      },
+      vendor: {
+        required: false,
+        validator: (val) => validateStringType(val, "vendor"),
+      },
+      qty_in_store: {
+        required: false,
+        validator: (val) => validateNumberType(val, "qty_in_store"),
+      },
+      rate: {
+        required: false,
+        validator: (val) => validateNumberType(val, "rate"),
+      },
+      unit: {
+        required: false,
+        validator: (val) => validateStringType(val, "unit"),
+      },
+    };
   }
 
-  async run() {
-    const products = await productServices.readAllProducts();
+  async run(data) {
+    const products = await productServices.readAllProducts(data.params);
 
     return { data: products };
   }
@@ -56,9 +91,11 @@ export class CreateProduct extends Action {
       },
       name: {
         required: true,
+        validator: (val) => validateStringType(val, "name"),
       },
       vendor: {
         required: true,
+        validator: (val) => validateStringType(val, "vendor"),
       },
       qty_in_store: {
         required: true,

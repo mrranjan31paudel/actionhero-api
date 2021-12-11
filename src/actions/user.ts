@@ -99,7 +99,7 @@ export class UpdateUser extends Action {
       },
       dob: {
         required: false,
-        validator: val => validateDate(val, 'dob'),
+        validator: (val) => validateDate(val, "dob"),
       },
       address: {
         required: false,

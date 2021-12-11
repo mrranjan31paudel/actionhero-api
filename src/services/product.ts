@@ -2,8 +2,31 @@ import ProductModel from "../models/Product";
 
 import { AlreadyExistsError, NotFoundError } from "../utils/errors";
 
-export async function readAllProducts() {
-  const data = await ProductModel.findAllProducts();
+export async function readAllProducts(params: any) {
+  const {
+    sortBy = "",
+    sortDir = "",
+    code = "",
+    name = "",
+    vendor = "",
+    qty_in_store = "",
+    rate = "",
+    unit = "",
+  } = params;
+  let sort = null;
+  let filter = {};
+
+  if (!!sortBy && !!sortDir && ["asc", "desc"].includes(sortDir))
+    sort = { [sortBy]: sortDir };
+  if (!!code && !isNaN(code)) filter["code"] = parseInt(code, 10);
+  if (!!qty_in_store && !isNaN(qty_in_store))
+    filter["qty_in_store"] = parseInt(qty_in_store, 10);
+  if (!!rate && !isNaN(rate)) filter["rate"] = parseInt(rate, 10);
+  if (!!name) filter["name"] = new RegExp(name, "i");
+  if (!!vendor) filter["vendor"] = new RegExp(vendor, "i");
+  if (!!unit) filter["unit"] = new RegExp(unit, "i");
+
+  const data = await ProductModel.findAllProducts(filter, sort);
 
   return data;
 }
