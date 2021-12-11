@@ -9,12 +9,21 @@ export interface ProductType {
   unit?: string;
 }
 
-function findAllProducts(filter: any = {}, sort?: any) {
+function countAllProducts(filter: any = {}) {
+  return api.colls.products.countDocuments(filter);
+}
+
+function findAllProducts(
+  filter: any = {},
+  offset: number,
+  limit: number,
+  sort?: any
+) {
   let query = api.colls.products.find(filter);
 
   if (sort !== null) query.sort(sort);
 
-  return query.lean().exec();
+  return query.skip(offset).limit(limit).lean().exec();
 }
 
 function findProductByCode(code: number) {
@@ -36,6 +45,7 @@ function deleteProductByCode(code: number) {
 }
 
 export default {
+  countAllProducts,
   findAllProducts,
   createNewProduct,
   findProductByCode,

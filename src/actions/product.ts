@@ -45,13 +45,23 @@ export class GetAllProducts extends Action {
         required: false,
         validator: (val) => validateStringType(val, "unit"),
       },
+      pageNum: {
+        required: true,
+        validator: (val) => validateNumberType(val, "pageNum"),
+      },
+      pageSize: {
+        required: true,
+        validator: (val) => validateNumberType(val, "pageSize"),
+      },
     };
   }
 
   async run(data) {
-    const products = await productServices.readAllProducts(data.params);
+    const { records, pagination } = await productServices.readAllProducts(
+      data.params
+    );
 
-    return { data: products };
+    return { data: { records, pagination } };
   }
 }
 
